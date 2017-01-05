@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>No Man's Click</title>
+	<link rel="icon" type="image/png" href="https://s28.postimg.org/52msc8959/icon.png">
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="noclickssky.js"></script>
+</head>
+
+<body id="background" onload="gameLoad()">
+	<div class="leftside">
+		<div class="transparentcontainer">
+			<div class="wrapper">
+				<div class="leftnav">
+					<div class="hovertip" onclick="changeTab(event, 'profile')" id="defaultTab"><img src="img/navicons/profile.png"/><span class="hovertext">Profile</span></div>
+					<div class="hovertip" onclick="changeTab(event, 'upgrades')"><img src="img/navicons/upgrades.png"><span class="hovertext">Upgrades</span></div>
+					<div class="hovertip" onclick="changeTab(event, 'runesz')"><img src="img/navicons/runes.png"/><span class="hovertext">Runes</span></div>
+					<div class="hovertip" onclick="changeTab(event, 'unity')"><img src="img/navicons/unity.png"/><span class="hovertext">Unity</span></div>
+					<div class="hovertip" onclick="changeTab(event, 'achievements')"><img src="img/navicons/achievements.png"/><span class="hovertext">Achievements</span></div>
+				</div>
+				<div class="rightnav">
+					<div class="hovertip" onclick="changeTab(event, 'changelog')"><img src="img/navicons/star.png"/><span class="hovertext">Changelog</span></div>
+					<div class="hovertip" onclick="changeTab(event, 'settings')"><img src="img/navicons/settings.png"/><span class="hovertext">Settings</span></div>
+					<div class="hovertip"><img src="img/navicons/support.png"/><span class="hovertext">Support me</span></div>
+					<div class="hovertip"><a href="wiki.html"><img src="img/navicons/wiki.png"/></a><span class="hovertext">Wiki</span></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			
+			<div class="tabcontent" id="profile">
+				<div class="wrapper">
+					<div class="profuser fblue">
+						<div class="header">User Profile</div>
+						<div class="profcontent">
+						Game started: <span class="fwhite" id="hours">0</span>h <span class="fwhite" id="minutes">0</span>m <span class="fwhite" id="seconds">0</span>s<br><br>
+						Username: <span class="fwhite" id="displayuser"></span><br>
+						Level: <span class="fwhite" id="playerlevel">1</span><br>
+						Experience: <span class="fwhite" id="playerexperience">0</span> / <span class="fwhite" id="experiencerequired">2</span><br><br>
+						Achievements: <span class="fwhite" id="achievementsunlocked">0</span> / <span class="fwhite">20</span><br>
+						Crafting Items: <span class="fwhite">0</span>
+						</div>
+					</div>
+					<div class="profuser fgreen">
+						<div class="header">Damage</div>
+						<div class="profcontent">
+						Damage: <span class="fwhite" id="damage">1</span><br>
+						Critical hit chance: <span class="fwhite" id="criticalhitchance">0</span>%<br>
+						Global damage multiplier: <span class="fwhite" id="globalmultiplier">0</span>%<br>
+						</div>
+					</div>
+					<div class="clear"></div>
+					<div class="profuser fblue">
+						<div class="header">This universe</div>
+						<div class="profcontent">
+						
+						</div>
+					</div>
+					<div class="profuser forange">
+						<div class="header">All time total</div>
+						<div class="profcontent">
+						Clicks: <span class="fwhite" id="alltimeclicks">0</span><br>
+						Ticks: <span class="fwhite" id="alltimeticks">0</span><br>
+						Critical Hits: <span class="fwhite" id="alltimecriticalhits">0</span><br><br>
+						Plutonium: <span class="fwhite" id="alltimeplutonium">0</span><br>
+						Viridium: <span class="fwhite" id="alltimeviridium">0</span><br>
+						Heridium <span class="fwhite" id="alltimeheridium">0</span><br>
+						Dark fragments: <span class="fwhite" id="alltimedarkfragment">0</span><br>
+						Dark matter: <span class="fwhite" id="alltimedarkmatter">0</span><br>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			
+			<div class="tabcontent" id="upgrades">
+				<div class="shopcontainer">
+					<div class="header fgreen">Laser Beam</div>
+					<div id="laserbeamboxes"></div>
+				</div>
+				<div class="shopcontainer">
+					<div class="header fblue">Boltcaster</div>
+					<div id="boltcasterboxes"></div>
+				</div><div class="clear"></div>
+				<div class="shopcontainer">
+					<div class="header fpurple">Plasma Launcher</div>
+					<div id="plasmalauncherboxes"></div>
+				</div><div class="clear"></div>
+			</div>
+			
+			<div class="tabcontent" id="runesz">
+				<div class="wrapper">
+					<div class="runecontainer fwhite">
+						<div class="header fgreen">Agility</div>
+						<div class="runebutton runegreen" onclick="runeRicochet()">
+							<div class="runename fgreen">Ricochet</div>
+							<div class="infotext">+1% chance to drop dark fragment every click<br><span style="font-size: 20px" class="fgreen" id="ricochetstat">+0%</span></div>
+						</div>
+						<div class="runebutton runegreen" onclick="runeMeditation()">
+							<div class="runename fgreen">Meditation</div>
+							<div class="infotext">-10ms tick to idle playstyle<br><span style="font-size: 20px" class="fgreen" id="meditationstat">1000ms</span></div>
+						</div>
+					</div>
+					<div class="runecontainer fwhite">
+						<div class="header fblue">Intellect</div>
+						<div class="runebutton runeblue" onclick="yGemMastery()">
+							<div class="runename fblue">Gem mastery</div>
+							<div class="infotext">+10% resources found<br><span style="font-size: 20px" class="fblue" id="gemmasterystat">+0%</span></div>
+						</div>
+						<div class="runebutton runeblue">
+							<div class="runename fblue">Laser scope</div>
+							<div class="infotext">+0.1% damage per unlocked achievement<br><span style="font-size: 20px" class="fblue">+0.0%</span></div>
+						</div>
+					</div>
+					<div class="runecontainer fwhite">
+						<div class="header fred">Strength</div>
+						<div class="runebutton runered" onclick="runeOverheat()">
+							<div class="runename fred">Overheat</div>
+							<div class="infotext">+1% chance to critical hit<br><span style="font-size: 20px" class="fred" id="overheatstat">+0%</span></div>
+						</div>
+						<div class="runebutton runered" onclick="runeBlaster()">
+							<div class="runename fred">Blaster</div>
+							<div class="infotext">+10% critical hit damage<br><span style="font-size: 20px" class="fred" id="blasterstat">+200%</span></div>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+				<h4>Stash</h4>
+				<span id="stashdarkfragment">0</span> <img src="img/darkfragment.png"/><br>
+				<span id="stashdarkmatter">0</span> <img src="img/darkmatter.png"/><br>
+				<span id="runes">0</span> Runes
+			</div>
+			
+			<div class="tabcontent" id="unity">
+				<p class="fblue">Planned for the future. Read the Changelog for more info</p>
+			</div>
+			
+			<div class="tabcontent" id="achievements"></div>
+			
+			<div class="tabcontent" id="changelog">
+				<div class="header fblue">No Click's Sky v0.7.2 Alpha</div>
+				<ul class="fwhite">
+					<p class="fgreen">What's new?</p>
+					<li>Visual improvements</li>
+					<li>Performance improvements</li>
+					<p class="fgreen">To do list</p>
+					<li>Game takes time to load when hosted online, in need of a loading screen</li>
+					<li>Create a save file (cookies, saves will be reset with mySQL save implementation)</li>
+					<li>With mySQL, unities (multiplayer part) will be done as well</li>
+					<li>Re-balance the entire game to create a fun loop</li>
+					<li>Add more settings</li>
+					<li>Add more achievements</li>
+					<li>Add more crafting items</li>
+					<li>Add more upgrades</li>
+					<li>Make "Support Me" tab</li>
+					<li>Release Beta (first "playable") version</li>
+				</ul>
+			</div>
+			
+			<div class="tabcontent" id="settings">
+				<div class="header fblue">Settings</div>
+				<div class="btn"><div class="header fgreen">Sounds</div> <div class="testbtn" id="mutesounds" onclick="muteSounds()">On</div></div>
+				<div class="btn"><div class="header fgreen">Playstyle</div> <div class="testbtn" id="playstyle" onclick="playStyle()">Active</div></div>
+				<div class="btn"><div class="header fgreen">Background</div> <div class="testbtn" id="backgroundchange" onclick="changeBackground()">BG 1</div></div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="transparentcontainer fblue">
+			<span class="fblue" id="log1">Zone Logs<br>Rewards</span><br>
+			<span class="fgreen" id="log2">Level Logs</span><br>
+		</div>
+	</div>
+	
+	<div class="rightside">
+		<div class="transparentcontainer">
+			<div class="cursorpointer" id="imagewrapper"><img src="img/1.jpg" id="oreimage" onclick="doDamage()"/></div>
+			
+			<div class="planetcontent" id="1">
+				<div class="fwhite">
+					<span class="fblue">Stash:</span> <span id="stashplutonium">0</span> <img src="img/plutonium.png"/><br>
+					<span class="fblue">Zone:</span> <span id="level">1</span><br>
+					<span class="fblue">Health:</span> <span id="hitpoints">6</span> / <span id="maxhitpoints">6</span><br>
+					<span class="fgreen">None</span>
+				</div>
+			</div>
+			
+			<div class="planetcontent" id="2">
+				<div class="fwhite">
+					<span class="fblue">Stash:</span> <span id="stashviridium">0</span> <img src="img/viridium.png"/><br>
+					<span class="fblue">Zone:</span> <span id="grudnockzone">1</span><br>
+					<span class="fblue">Health:</span> <span id="grudnockhealth">1 million</span> / <span id="grudnockmaxhealth">1 million</span><br>
+					<span class="fgreen">Armor:</span> <span id="grudnockarmor">15000</span>
+				</div>
+			</div>
+			
+			<div class="planetcontent" id="3">
+				<div class="fwhite">
+					<span class="fblue">Stash:</span> <span id="stashheridium">0</span> <img src="img/heridium.png"/><br>
+					<span class="fblue">Zone:</span> <span id="gazorpazorpzone">1</span><br>
+					<span class="fblue">Health:</span> <span id="gazorpazorphealth">1 trillion</span> / <span id="gazorpazorpmaxhealth">1 trillion</span><br>
+					<span class="fgreen">Armor:</span> <span id="grudnockarmor">1,000,000</span> <span class="fgreen">Regeneration</span> <span id="gazorpazorpregeneration">+1000/s</span>
+				</div>
+			</div>
+			
+			<div id="healthbar">
+				<div id="healthpoints"></div>
+			</div>
+			
+			<div class="wrapper">
+				<div id="crafts"></div>
+			</div>
+		</div>
+		
+		<div class="transparentcontainer fwhite">
+			<span class="fwhite">Planet:</span>
+			<div class="planetbtn" id="defaultPlanet" onclick="changePlanet(event, '1')">Earth</div>
+			<div class="disabled planetbtn" id="changegrudnock" onclick="changePlanet(event, '2')">Grudnock</div>
+			<div class="disabled planetbtn" id="changegazorpazorp" onclick="changePlanet(event, '3')">Gazorpazorp</div>
+		</div>
+		
+		<div class="transparentcontainer">
+		<script id="cid0020000144468859962" data-cfasync="false" async src="http://st.chatango.com/js/gz/emb.js" style="width: 100%;height: 250px;">{"handle":"noclickssky","arch":"js","styles":{"a":"00ccff","b":100,"c":"000000","d":"000000","k":"00ccff","l":"00ccff","m":"00ccff","p":"10","q":"00ccff","r":100,"t":0,"usricon":0,"surl":0}}</script>
+	</div>
+	</div>
+</body>
+
+</html>
