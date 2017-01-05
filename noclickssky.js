@@ -1,3 +1,8 @@
+var nlg=localStorage;
+function loadITM(key) {
+	if (nlg[key] == null) nlg[key]=window[key];
+	window[key]=nlg[key];
+}
 var	beamFocusCost = 10, beamFocusCounter = 0, beamFocusDamage = 0, beamFocusIncrement = 1;
 var beamIntensifierCost = 150, beamIntensifierCounter = 0, beamIntensifierDamage = 0, beamIntensifierIncrement = 10;
 var coolingSystemCost = 50, coolingSystemCounter = 0, coolingSystemDamage = 0, coolingSystemIncrement = 500;
@@ -10,15 +15,17 @@ var darkFragment = 0,
 	runes = 0,
 	damage = 1,
 	//Zone
-	zone = 1,
-	zoneHealth = (zone + 2) * (zone * 2),
+	zone = 1;
+loadITM("zone");
+var	zoneHealth = (zone + 2) * (zone * 2),
 	zoneMaxHealth = (zone + 2) * (zone * 2),
 	healthWidth = 100,
 	plutonium = 0,
 	allTimePlutonium = 0,
 	//Grudnock
-	grudnockZone = 1,
-	grudnockMaxZone = 1,
+	grudnockZone = 1;
+loadITM("grudnockZone");
+var	grudnockMaxZone = 1,
 	grudnockHealth = 1000000 + (grudnockZone + 2) * (grudnockZone * 3),
 	grudnockMaxHealth = 1000000 + (grudnockZone + 2) * (grudnockZone * 3),
 	grudnockArmor = 15000,
@@ -26,8 +33,9 @@ var darkFragment = 0,
 	viridium = 0,
 	allTimeViridium = 0,
 	//Gazorpazorp
-	gazorpazorpZone = 1,
-	gazorpazorpMaxZone = 1,
+	gazorpazorpZone = 1;
+loadITM("gazorpazorpZone")
+var	gazorpazorpMaxZone = 1,
 	gazorpazorpHealth = 1000000000000 + (gazorpazorpZone + 10000) * (gazorpazorpZone * 10000),
 	gazorpazorpMaxHealth = 1000000000000 + (gazorpazorpZone + 10000) * (gazorpazorpZone * 10000),
 	gazorpazorpHealthWidth = 100,
@@ -78,8 +86,17 @@ function gameLoad(){
 }
 
 function loadGame(){
-	plutonium = localStorage.getItem("plutonium");
-	console.log(localStorage.getItem("plutonium"));
+  let toLoad = [
+		"plutonium",
+		"damage",
+		"playerLevel",
+		"playerExperience",
+		"playStyle"
+		/*add more shit here!!!!!!!!!!!!!!!!!!!*/
+	];
+	for (var i in toLoad) {
+		loadITM(i);
+	}
 }
 
 var hours = 0;
