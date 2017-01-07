@@ -63,8 +63,8 @@ var game = {
 		}
 	}
 };
-if (nlg["game"] == undefined) {nlg["game"] = game;}
-game = nlg["game"];
+if (nlg["game"] == undefined) {nlg["game"] = JSON.stringify(game);}
+game = JSON.parse(nlg["game"]);
 var	beamFocusCost = 10, beamFocusCounter = 0, beamFocusDamage = 0, beamFocusIncrement = 1;
 var beamIntensifierCost = 150, beamIntensifierCounter = 0, beamIntensifierDamage = 0, beamIntensifierIncrement = 10;
 var coolingSystemCost = 50, coolingSystemCounter = 0, coolingSystemDamage = 0, coolingSystemIncrement = 500;
@@ -142,7 +142,7 @@ function gameLoad(){
 	
 	var timer = setInterval(gameTimer, 1000);
 	var saveTimer = setInterval(function () {
-		nlg["game"] = game;
+		nlg["game"] = JSON.stringify(game);
 	}, 60000);
 	
 	checkAchievements();
@@ -165,7 +165,7 @@ function loadGame(){
 }
 
 function gameTimer(){
-	game.time.seconds ++;
+	game.time.seconds++;
 	
 	if(game.time.seconds > 59){
 		game.time.seconds = 0;
