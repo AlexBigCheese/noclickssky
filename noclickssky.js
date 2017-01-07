@@ -63,6 +63,7 @@ var game = {
 		}
 	}
 };
+loadITM("game");
 var	beamFocusCost = 10, beamFocusCounter = 0, beamFocusDamage = 0, beamFocusIncrement = 1;
 var beamIntensifierCost = 150, beamIntensifierCounter = 0, beamIntensifierDamage = 0, beamIntensifierIncrement = 10;
 var coolingSystemCost = 50, coolingSystemCounter = 0, coolingSystemDamage = 0, coolingSystemIncrement = 500;
@@ -139,6 +140,9 @@ function gameLoad(){
 	generateLaserBeam();
 	
 	var timer = setInterval(gameTimer, 1000);
+	var saveTimer = setInterval(function () {
+		nlg["game"] = game;
+	}, 60000);
 	
 	checkAchievements();
 	document.getElementById("defaultTab").click();
