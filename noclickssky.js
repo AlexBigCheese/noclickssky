@@ -63,7 +63,7 @@ var game = {
 		}
 	}
 };
-if (nlg["game"] == null) {nlg["game"] = game;}
+if (nlg["game"] == undefined) {nlg["game"] = game;}
 game = nlg["game"];
 var	beamFocusCost = 10, beamFocusCounter = 0, beamFocusDamage = 0, beamFocusIncrement = 1;
 var beamIntensifierCost = 150, beamIntensifierCounter = 0, beamIntensifierDamage = 0, beamIntensifierIncrement = 10;
