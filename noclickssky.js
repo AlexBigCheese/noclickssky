@@ -3,6 +3,66 @@ function loadITM(key) {
 	if (nlg[key] == null) nlg[key]=window[key];
 	window[key]=nlg[key];
 }
+var game = {
+	time: {
+		seconds: 0,
+		minutes: 0,
+		hours: 0
+	},
+	player: {
+		plutonium: 0,
+		allTimeP: 0,
+		veridium: 0,
+		allTimeV: 0,
+		heridium: 0,
+		allTimeH:0,
+		darkFragment:0,
+		allTimeDF:0,
+		darkMatter:0,
+		allTimeDM:0,
+		runes: 0,
+		damage: 1,
+		weapons: {
+			earth: {
+				beamFocus: {
+					cost: 10,
+					count: 0,
+					dam: 0,
+					inc: 1
+				},
+				beamInt: {
+					cost: 150,
+					count: 0,
+					dam: 0,
+					inc: 10
+				},
+				coolSys: {
+					cost: 50,
+					count:0,
+					dam:0,
+					inc: 500
+				},
+				amp: {
+					cost:500,
+					count:0,
+					dam:0,
+					inc:20e3
+				}
+			}
+		}
+	},
+	planet: {
+		earth: {
+			zone: 1
+		},
+		grudnock: {
+			zone: 1
+		},
+		gazorpazorp: {
+			zone: 1
+		}
+	}
+};
 var	beamFocusCost = 10, beamFocusCounter = 0, beamFocusDamage = 0, beamFocusIncrement = 1;
 var beamIntensifierCost = 150, beamIntensifierCounter = 0, beamIntensifierDamage = 0, beamIntensifierIncrement = 10;
 var coolingSystemCost = 50, coolingSystemCounter = 0, coolingSystemDamage = 0, coolingSystemIncrement = 500;
@@ -99,24 +159,21 @@ function loadGame(){
 	}
 }
 
-var hours = 0;
-var seconds = 0;
-var minutes = 0;
 function gameTimer(){
-	seconds ++;
+	game.time.seconds ++;
 	
-	if(seconds > 59){
-		seconds = 0;
-		minutes ++;
+	if(game.time.seconds > 59){
+		game.time.seconds = 0;
+		game.time.minutes ++;
 	}
-	if(minutes > 59){
-		minutes = 0;
-		hours ++;
+	if(game.time.minutes > 59){
+		game.time.minutes = 0;
+		game.time.hours ++;
 	}
 	
-	document.getElementById("seconds").innerHTML = seconds;
-	document.getElementById("minutes").innerHTML = minutes;
-	document.getElementById("hours").innerHTML = hours;
+	document.getElementById("seconds").innerHTML = game.time.seconds;
+	document.getElementById("minutes").innerHTML = game.time.minutes;
+	document.getElementById("hours").innerHTML = game.time.hours;
 }
 
 var meditation = 0;
